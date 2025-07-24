@@ -1,84 +1,76 @@
-# 🧬 Obesity Precision Medicine with Clustering & RAG-LLM
+# 🧠 Obesity Risk Prediction and RAG-based Personalized Recommendation
 
-This project explores a precision medicine approach to obesity by combining unsupervised clustering, obesity level prediction, and guideline-based LLM recommendations (RAG). We segment patients into clusters based on lifestyle and demographic features and deliver customized insights using medical guideline documents.
-
----
-
-## 📌 Project Overview
-
-### 🔹 1. Preprocessing
-We clean and normalize the dataset, handle categorical values, remove outliers, and scale features.
-
-**Notebook:** `[Project] 1. Obesity_preprocessing.ipynb`
-
-### 🔹 2. Clustering for Patient Segmentation
-Using KMeans and silhouette score analysis, we segment patients into 10 clusters based on risk and lifestyle profiles.
-
-**Notebook:** `[Project] 2. Clustering_new.ipynb`
-
-### 🔹 3. Obesity Level Prediction
-A logistic regression model is trained to predict obesity level. We use accuracy and confusion matrix to evaluate performance.
-
-**Notebook:** `[Project] 3. Obesity_prediction.ipynb`
-
-### 🔹 4. Guideline-based RAG-LLM (Gemini)
-A Retrieval-Augmented Generation (RAG) system extracts relevant content from obesity treatment guidelines (PDFs), and generates answers using the Gemini LLM. Evaluation is performed via BERTScore.
-
-**Notebook:** `[Project] 4. pdf processing-RAG-LLM with clusters(진짜).ipynb`
+This project combines clustering and predictive modeling with a RAG (Retrieval-Augmented Generation) system to analyze and provide insights for obesity treatment strategies.
 
 ---
 
-## 🚀 How to Run
-
-1. **Install Requirements**
-```bash
-pip install -r requirements.txt
-```
-
-2. **Run in Order**
-   - `Obesity_preprocessing.ipynb`
-   - `Clustering_new.ipynb`
-   - `Obesity_prediction.ipynb`
-   - `pdf processing-RAG-LLM with clusters(진짜).ipynb`
-
----
-
-## 📂 Folder Structure
+## 📂 Project Structure
 
 ```
-project-root/
-│
-├── data/                         # Input and processed datasets
-├── notebooks/
-│   ├── Obesity_preprocessing.ipynb
-│   ├── Clustering_new.ipynb
-│   ├── Obesity_prediction.ipynb
-│   └── pdf processing-RAG-LLM with clusters(진짜).ipynb
-├── outputs/                      # Cluster profiles, prediction results, etc.
+obesity-rag-project/
+├── Data/
+│   └── obesity.csv                 # Original dataset (cleaned)
+├── Code/
+│   ├── 1_preprocessing.ipynb      # Data cleaning and preprocessing
+│   ├── 2_clustering.ipynb         # KMeans clustering (k=10) and cluster profiling
+│   ├── 3_prediction.ipynb         # Obesity level prediction using Logistic Regression
+│   └── 4_rag_llm.ipynb            # RAG+LLM: Cluster-based health advice generation
+├── requirements.txt               # Python dependencies
 └── README.md
 ```
 
 ---
 
-## 🧠 Example Use Case
+## 🚀 Key Features
 
-> "Given this patient’s profile (high sedentary time, low physical activity, frequent high-calorie food intake), what is their risk score and what treatment advice applies?"
-
-1. Assigns patient to most similar cluster using KMeans
-2. Returns summarized guideline advice (via Gemini) for that cluster
-3. Ranks output based on content similarity (BERTScore)
+- **📊 Data Preprocessing**: Encoding, scaling, handling categorical features  
+- **🔍 Clustering**: KMeans-based segmentation of users for personalized insights  
+- **🧠 Prediction**: Logistic Regression model to estimate obesity risk  
+- **🧾 RAG with LLM**: PDF-based medical guideline + cluster context → treatment advice
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Language**: Python
-- **Libraries**: scikit-learn, pandas, matplotlib, seaborn, sentence-transformers
-- **LLM**: Google Gemini Pro (via API)
-- **Evaluation**: BERTScore
+- `Python`, `scikit-learn`, `pandas`, `matplotlib`
+- `Sentence-BERT`, `BERTScore`, `PyPDF2`
+- (Optional) `OpenAI` / `Gemini API` for medical LLMs
 
 ---
 
-## 📄 Authors
+## ✅ Usage
 
-- Goyeun Yun (OMSA, Spring 2025)
+1. Clone the repository:
+
+```bash
+git clone https://github.com/goneyak/obesity-rag-project.git
+cd obesity-rag-project
+```
+
+2. Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+3. Run each notebook in order:
+
+- `Code/1_preprocessing.ipynb`  
+- `Code/2_clustering.ipynb`  
+- `Code/3_prediction.ipynb`  
+- `Code/4_rag_llm.ipynb`
+
+---
+
+## 📌 Notes
+
+- Data is cleaned and ready to use (`obesity.csv`)
+- You may need your own LLM API key (e.g., Gemini or OpenAI) for `4_rag_llm.ipynb`
+
+---
+
+## 🧑‍💻 Author
+
+- Goyeun Yun (윤고은)  
+- Pharm.D | Healthcare + Data Science  
+- 📫 [LinkedIn](https://linkedin.com/in/goyeun-yun-2a939b22a) | ✉️ goneyak0323@gmail.com  
