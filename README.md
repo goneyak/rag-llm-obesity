@@ -66,11 +66,3 @@ pip install -r requirements.txt
 
 - Data is cleaned and ready to use (`obesity.csv`)
 - You may need your own LLM API key (e.g., Gemini or OpenAI) for `4_rag_llm.ipynb`
-
----
-
-## 🧑‍💻 Author
-
-- Goyeun Yun (윤고은)  
-- Pharm.D | Healthcare + Data Science  
-- 📫 [LinkedIn](https://linkedin.com/in/goyeun-yun-2a939b22a) | ✉️ goneyak0323@gmail.com  
