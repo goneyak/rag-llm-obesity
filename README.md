@@ -1,115 +1,110 @@
 # RAG-LLM System for Obesity Risk Stratification and Personalized Treatment Reasoning
 
-This repository presents a system that integrates unsupervised phenotypic clustering, risk prediction modeling, and Retrieval-Augmented Generation (RAG) to support personalized obesity treatment reasoning. The system leverages structured population-level patterns alongside clinical guideline text to generate context-specific recommendations.
+Research portfolio project combining clustering, risk prediction, and guideline-grounded RAG to support interpretable obesity treatment reasoning.
 
 ## 1. Research Objective
 
-Obesity is a heterogeneous condition influenced by behavioral, metabolic, and socio-environmental factors. Conventional BMI- or weight-based classifications lack the resolution required for individualized clinical decision-making. The objective of this project is to:
+Obesity is heterogeneous across behavioral, metabolic, and socio-environmental dimensions. This project explores a structured pipeline that goes beyond single-metric categorization by:
 
-1. Identify clinically meaningful subgroups of individuals exhibiting distinct obesity-related phenotypes.
-2. Construct a risk prediction model capable of estimating an individual's likelihood of developing obesity.
-3. Integrate subgroup-level behavioral characteristics with clinical guideline evidence via RAG to support interpretable and tailored recommendations.
+1. Identifying phenotype-like lifestyle subgroups.
+2. Estimating obesity risk through supervised modeling.
+3. Grounding recommendation text in retrieved guideline evidence plus subgroup context.
 
 ## 2. Dataset
 
-The dataset contains lifestyle, dietary, physiological, and demographic features associated with obesity progression.
+The dataset contains lifestyle, dietary, physiological, and demographic features related to obesity progression.
 
-- Features include dietary frequency, physical activity level, sedentary time, smoking status, hydration level, meal timing, and familial obesity history.
-- Target variable: Multi-class obesity level (e.g., Normal Weight, Overweight, Obesity Type I–III).
-- All features were cleaned, encoded, and standardized prior to analysis.
+- Data file: `data/obesity.csv`
+- Target: multi-class obesity level
+- Typical features: eating habits, physical activity, sedentary behavior, hydration, smoking, and family obesity history
 
-## 3. Methodology
+## 3. Pipeline Summary
 
 ### 3.1 Preprocessing
 
-- Encoding categorical lifestyle and dietary variables
-- Standardization of continuous features
-- Removal of redundant or low-variance features
+- Encode categorical variables
+- Standardize continuous features
+- Prepare cleaned feature matrix for downstream analysis
 
 ### 3.2 Clustering
 
-- K-Means clustering (k = 10) was used to derive lifestyle- and behavior-based phenotypes.
-- Cluster profiles were interpreted by examining average feature distributions.
-- Examples of derived profiles include:
-  - High sedentary behavior with caloric excess
-  - Active individuals with high caloric intake
-  - Irregular meal schedule and sleep instability
-  - Familial predisposition dominant groups
+- Derive subgroup structure using unsupervised methods
+- Interpret subgroup profiles from feature-level patterns
 
 ### 3.3 Risk Prediction
 
-- A multinomial logistic regression model was trained to classify obesity levels.
-- Model performance was evaluated using accuracy and confusion matrices.
-- The model generates probabilistic risk profiles rather than binary decisions.
+- Train a multinomial logistic regression classifier for obesity level estimation
+- Evaluate with standard classification metrics
 
-### 3.4 Retrieval-Augmented Generation (RAG)
+### 3.4 Guideline-Grounded RAG
 
-- Obesity treatment guidelines were embedded and indexed.
-- For a given individual:
-  1. Cluster membership is determined.
-  2. Relevant guideline sections are retrieved.
-  3. Cluster characteristics and guideline evidence are synthesized using a controlled LLM prompting method.
+- Embed and retrieve obesity guideline snippets
+- Combine retrieved evidence with subgroup context
+- Generate recommendation-style reasoning with evidence grounding
 
-- This approach ensures traceability to both group-level behavioral patterns and authoritative clinical sources.
+## 4. Stage Outputs
 
-## 4. System Workflow
+1. `code/1_preprocessing.ipynb`
+- cleaned/encoded data and analysis-ready inputs
 
-- Input Patient Features
-- Data Standardization
-- Cluster Assignment (K-Means)
-- Risk Prediction (Logistic Regression)
-- RAG Query:
-  - Retrieve relevant guideline text
-  - Retrieve cluster-specific behavioral profile
-- LLM-Based Synthesis (Controlled Prompt Template)
-- Personalized Recommendation Output
+2. `code/2_clustering.ipynb`
+- subgroup assignments and profile interpretation artifacts
 
-## 5. Results
+3. `code/3_prediction.ipynb`
+- obesity risk model outputs and evaluation summaries
 
-- Clustering identified distinct behavioral phenotypes not captured by BMI alone.
-- The logistic regression model achieved strong multi-class prediction performance, producing interpretable risk distributions.
-- The RAG pipeline generated recommendations that aligned with clinical guidelines and reflected behavioral subgroup context.
+4. `code/4_rag_llm.ipynb`
+- guideline retrieval and LLM-based synthesized recommendations
 
-## 6. Repository Structure
-```
+## 5. Repository Structure
+
+```text
 rag-llm-obesity/
+├── code/
+│   ├── 1_preprocessing.ipynb
+│   ├── 2_clustering.ipynb
+│   ├── 3_prediction.ipynb
+│   └── 4_rag_llm.ipynb
 ├── data/
 │   └── obesity.csv
-├── code/
-│   ├── preprocessing.ipynb
-│   ├── clustering.ipynb
-│   ├── prediction.ipynb
-│   └── rag_llm.ipynb
 ├── doc/
 │   └── project_report.pdf
 ├── requirements.txt
 └── README.md
 ```
 
-## 7. Installation
+## 6. Installation
+
+Run from repository root:
+
+```bash
 pip install -r requirements.txt
+```
 
+## 7. Reproducibility
 
-## 8. Reproducibility
+Open notebooks from repository root and run in this exact order:
 
-Run the analysis in the following sequence:
+1. `code/1_preprocessing.ipynb`
+2. `code/2_clustering.ipynb`
+3. `code/3_prediction.ipynb`
+4. `code/4_rag_llm.ipynb`
 
-1. `code/preprocessing.ipynb`
-2. `code/clustering.ipynb`
-3. `code/prediction.ipynb`
-3. `code/rag_llm.ipynb`
+## 8. Environment Notes
 
-## 9. Future Work
+- `code/4_rag_llm.ipynb` expects an LLM API key via environment variable:
+- `GEMINI_API_KEY`
+- If you use a different provider, update only the notebook runtime configuration (do not hardcode secrets in the notebook).
 
-- External validation on clinical patient cohorts
-- Integration of laboratory and longitudinal clinical measurements
-- Evaluation of treatment recommendation effectiveness through counterfactual analysis
+## 9. Prototype Notes and Limitations
 
+- This is a research and educational portfolio prototype.
+- The workflow is designed for interpretability and evidence grounding, not direct clinical deployment.
+- Recommendations are generated from retrieved guideline text plus subgroup context, but this repository does not provide external clinical validation.
 
+## 10. Future Work
 
-
-
-
-
-
+- External validation on independent cohorts
+- Integration of longitudinal and laboratory features
+- More rigorous evaluation of recommendation quality and robustness
 mini or OpenAI) for `4_rag_llm.ipynb`
