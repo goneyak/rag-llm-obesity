@@ -107,4 +107,3 @@ Open notebooks from repository root and run in this exact order:
 - External validation on independent cohorts
 - Integration of longitudinal and laboratory features
 - More rigorous evaluation of recommendation quality and robustness
-mini or OpenAI) for `4_rag_llm.ipynb`
