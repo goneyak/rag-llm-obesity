@@ -13,3 +13,15 @@ env/
 
 # Notebook/runtime artifacts
 *.log
+
+# Generated artifacts (re-created by running notebooks in order)
+artifacts/*.pkl
+artifacts/*.npz
+artifacts/*.npy
+artifacts/*.csv
+artifacts/*.json
+!artifacts/.gitkeep
+
+# Environment variables
+.env
+

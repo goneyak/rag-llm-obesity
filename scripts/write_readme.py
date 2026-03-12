@@ -1,4 +1,5 @@
-# RAG + LLM 비만 관리 추천 시스템
+import sys
+content = """# RAG + LLM 비만 관리 추천 시스템
 
 행동/생활습관 데이터로 비만 위험을 분석하고, RAG와 Gemini LLM을 결합하여
 개인화된 비만 관리 가이드라인을 추천하는 파이프라인입니다.
@@ -84,3 +85,7 @@ cp .env.example .env
 - **출처**: [UCI Obesity Dataset](https://archive.ics.uci.edu/dataset/544/estimation+of+obesity+levels+based+on+eating+habits+and+physical+condition)
 - 샘플 수: 2,111 / 피처: 17 / 타겟: 7-class 비만 분류
 - 참고: 77%는 합성 데이터(SMOTE)로 생성된 것으로 알려져 있음
+"""
+with open("/Users/cocoxoxo/rag-llm-obesity/README.md", "w", encoding="utf-8") as f:
+    f.write(content)
+print("README.md written")
